@@ -59,7 +59,7 @@ a, button {
   @apply flex flex-wrap;
 }
 .main-btn {
-  @apply inline-block font-medium text-base text-center rounded-full text-white cursor-pointer z-10 transition-all duration-300 bg-black overflow-hidden relative px-10 py-4 hover:bg-opacity-80 hover:text-white;
+  @apply inline-block font-medium text-base text-center rounded-full text-white cursor-pointer z-10 transition-all duration-300 bg-theme-color overflow-hidden relative px-10 py-4 hover:bg-opacity-80 hover:text-white;
   border-top-right-radius: 0px;
 }
 

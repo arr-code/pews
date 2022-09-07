@@ -91,7 +91,7 @@ const Home: NextPage = () => {
                     <div className="w-full lg:w-1/2">
                         <div className="header_hero_content pt-150 lg:pt-0">
                             <h2 className="hero_title text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold">Pediatric Early Warning Score (<span className="text-theme-color">PEWS</span>)</h2>
-                            <p className="mt-8 lg:mr-8">Pews merupakan salah satu alat atau sistem skoring menggunakan karakteristik pasien yang dapat mendeteksi perburukan klinis pada anak di ruang rawat inap saat ini belumÂ ada konsensus dan juga bukti sistem PEW yang paling berguna atau optimal untuk kasus anak.</p>
+                            <p className="mt-8 lg:mr-8">Pews merupakan salah satu alat atau sistem skoring menggunakan karakteristik pasien yang dapat mendeteksi perburukan klinis pada anak di ruang rawat inap saat ini belum ada konsensus dan juga bukti sistem PEW yang paling berguna atau optimal untuk kasus anak.</p>
                             <div className="hero_btn mt-10">
                                 <a className="main-btn" href="#" id="get_started">Get Started</a>
                             </div>
@@ -131,7 +131,7 @@ const Home: NextPage = () => {
                                     <label htmlFor="blood_pressure" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pulse</label>
                                 </div>
                                 <div id="button" className="flex flex-col w-full my-3">
-                                    <button type="button" className="w-full py-2 bg-slate-700 rounded-lg text-white">
+                                    <button type="button" className="w-full py-2 bg-theme-color rounded-lg text-white">
                                         <div className="flex flex-row items-center justify-center">
                                             <div className="font-bold">Calculate</div>
                                         </div>

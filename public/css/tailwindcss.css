@@ -1139,7 +1139,7 @@ a, button {
 
 .main-btn {
   --tw-bg-opacity: 1;
-  background-color: rgba(56, 66, 77, var(--tw-bg-opacity));
+  background-color: rgba(249, 79, 79, var(--tw-bg-opacity));
 }
 
 .main-btn:hover{
