@@ -1402,6 +1402,12 @@ a, button {
   }
 }
 
+@media (max-width: 960px) {
+  .header_hero {
+    height: 1000px;
+  }
+}
+
 .hero_shape {
   opacity: 0.4;
   position: absolute;

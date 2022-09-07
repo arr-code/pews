@@ -28,6 +28,8 @@ module.exports = {
        }
     },
     screens: {
+      'xs': '360px',
+      // => @media (min-width: 320px) { ... }
       'sm': '540px',
       // => @media (min-width: 640px) { ... }
       'md': '720px',

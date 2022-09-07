@@ -1,7 +1,23 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
+import {useRef, useState} from 'react'
 
-const Home: NextPage = () => {
+function Home() {
+  const crtRef = useRef(null);
+  const [crt, setCrt] = useState(0);
+  const [respiratory_rate, setRespiratory_rate] = useState(0);
+  const [behaviour, setBehaviour] = useState(0);
+  const [blood_pressure, setBlood_pressure] = useState(0);
+  const [pulse, setPulse] = useState(0);
+
+  const get_started = () => {
+    if(crtRef.current !== null)
+      crtRef.current.focus()
+  }
+
+  const calculate = () => {
+    console.log(crt, respiratory_rate, behaviour, blood_pressure, pulse);
+  }
+
   return <>
     <Head>
       <title>PEWS | WIDYA</title>
@@ -32,11 +48,9 @@ const Home: NextPage = () => {
                             <a className="navbar-brand mr-5" href="#">
                                 <img src="images/logo.svg" alt="Logo" />
                             </a>
-                            {/* <button className="block navbar-toggler focus:outline-none lg:hidden" type="button" data-toggle="collapse" data-target="#navbarOne" aria-controls="navbarOne" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="toggler-icon"></span>
-                                <span className="toggler-icon"></span>
-                                <span className="toggler-icon"></span>
-                            </button> */}
+                            <button className="block navbar-toggler focus:outline-none lg:hidden" type="button" data-toggle="collapse" data-target="#navbarOne" aria-controls="navbarOne" aria-expanded="false" aria-label="Toggle navigation">
+                                <span className="text-theme-color font-semibold">Widya Septiani</span>
+                            </button>
 
                             <div className="absolute left-0 z-20 hidden w-full px-5 py-3 duration-300 bg-white lg:w-auto collapse navbar-collapse lg:block top-full mt-full lg:static lg:bg-transparent shadow lg:shadow-none" id="navbarOne">
                                 <ul id="nav" className="items-center content-start mr-auto lg:justify-end navbar-nav lg:flex">
@@ -89,49 +103,91 @@ const Home: NextPage = () => {
             <div className="container">
                 <div className="row">
                     <div className="w-full lg:w-1/2">
-                        <div className="header_hero_content pt-150 lg:pt-0">
+                        <div className="header_hero_content pt-110 lg:pt-0">
                             <h2 className="hero_title text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold">Pediatric Early Warning Score (<span className="text-theme-color">PEWS</span>)</h2>
-                            <p className="mt-8 lg:mr-8">Pews merupakan salah satu alat atau sistem skoring menggunakan karakteristik pasien yang dapat mendeteksi perburukan klinis pada anak di ruang rawat inap saat ini belum ada konsensus dan juga bukti sistem PEW yang paling berguna atau optimal untuk kasus anak.</p>
-                            <div className="hero_btn mt-10">
-                                <a className="main-btn" href="#" id="get_started">Get Started</a>
+                            <p className="mt-2 lg:mr-8">Pews merupakan salah satu alat atau sistem skoring menggunakan karakteristik pasien yang dapat mendeteksi perburukan klinis pada anak di ruang rawat inap saat ini belum ada konsensus dan juga bukti sistem PEW yang paling berguna atau optimal untuk kasus anak.</p>
+                            <div className="hero_btn mt-6">
+                                <a onClick={get_started} className="main-btn" href="#" id="get_started">Get Started</a>
                             </div>
                         </div> 
                     </div>
                 </div> 
             </div> 
             <div className="header_shape hidden lg:block"></div>
-
-            <div className="header_image flex items-center">
+            <div className="header_image flex items-center xs:h-screen">
                 <div className="image 2xl:pl-25 relative">
                     <img src="images/header-image.svg" alt="Header Image" className='object-cover opacity-70'/>
-                    <div className="absolute top-0 w-3/5 md:w-3/5 lg:w-3/5  mx-auto md:mx-0">
+                    <div className="absolute top-0 w-4/6 xs:w-full sm:w-full md:w-full lg:w-11/12 xl:w-4/6 2xl:w-4/6 mx-auto items-center shadow-lg">
                         <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl opacity-90">
+                            {/* <div className="2xl:bg-amber-900 xl:bg-red-900 lg:bg-blue-900 md:bg-green-900 sm:bg-slate-900 xs:bg-cyan-900 bg-violet-900">
+                                EUNOIA-CODE
+                            </div> */}
                             <h2 className="text-2xl font-bold text-gray-800 text-left mb-2">
                                 PEWS CALCULATOR
                             </h2>
-                            <form action="" className="w-full relative opacity-100">
+                            <form action="" id="pews-calculator" className="w-full relative opacity-100">
                                 <div className="relative mb-2">
-                                    <input type="text" id="crt" className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" placeholder=" " />
+                                    <input 
+                                      type="text" 
+                                      id="crt" 
+                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      placeholder=" " 
+                                      ref={crtRef} 
+                                      value={crt}
+                                      onChange={e => setCrt(+e.target.value)}
+                                    />
                                     <label htmlFor="crt" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">CRT</label>
                                 </div>
                                 <div className="relative mb-2">
-                                    <input type="text" id="respiratory_rate" className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" placeholder=" " />
+                                    <input 
+                                      type="text" 
+                                      id="respiratory_rate" 
+                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      placeholder=" " 
+                                      value={respiratory_rate}
+                                      onChange={e => setRespiratory_rate(+e.target.value)}
+                                    />
                                     <label htmlFor="respiratory_rate" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Respiratory Rate</label>
                                 </div>
                                 <div className="relative mb-2">
-                                    <input type="text" id="behaviour" className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" placeholder=" " />
+                                    <input 
+                                      type="text" 
+                                      id="behaviour" 
+                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      placeholder=" " 
+                                      value={behaviour}
+                                      onChange={e => setBehaviour(+e.target.value)}
+                                    />
                                     <label htmlFor="behaviour" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Behaviour</label>
                                 </div>
                                 <div className="relative mb-2">
-                                    <input type="text" id="pulse" className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" placeholder=" " />
-                                    <label htmlFor="pulse" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Blood Pressure</label>
+                                    <input 
+                                      type="text" 
+                                      id="blood_pressure" 
+                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      placeholder=" " 
+                                      value={blood_pressure}
+                                      onChange={e => setBlood_pressure(+e.target.value)}
+                                    />
+                                    <label htmlFor="blood_pressure" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Blood Pressure</label>
                                 </div>
                                 <div className="relative mb-2">
-                                    <input type="text" id="blood_pressure" className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" placeholder=" " />
-                                    <label htmlFor="blood_pressure" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pulse</label>
+                                    <input 
+                                      type="text" 
+                                      id="pulse" 
+                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      placeholder=" " 
+                                      value={pulse}
+                                      onChange={e => setPulse(+e.target.value)}
+                                    />
+                                    <label htmlFor="pulse" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pulse</label>
                                 </div>
                                 <div id="button" className="flex flex-col w-full my-3">
-                                    <button type="button" className="w-full py-2 bg-theme-color rounded-lg text-white">
+                                    <button 
+                                      type="button" 
+                                      className="w-full py-2 bg-theme-color rounded-lg text-white"
+                                      onClick={calculate}
+                                    >
                                         <div className="flex flex-row items-center justify-center">
                                             <div className="font-bold">Calculate</div>
                                         </div>
