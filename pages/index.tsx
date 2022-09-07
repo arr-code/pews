@@ -2,17 +2,18 @@ import Head from 'next/head'
 import {useRef, useState} from 'react'
 
 function Home() {
-  const crtRef = useRef(null);
+  const crtRef = useRef<any>(null);
   const [crt, setCrt] = useState(0);
   const [respiratory_rate, setRespiratory_rate] = useState(0);
   const [behaviour, setBehaviour] = useState(0);
   const [blood_pressure, setBlood_pressure] = useState(0);
   const [pulse, setPulse] = useState(0);
 
-  const get_started = () => {
-    if(crtRef.current !== null)
-      crtRef.current.focus()
-  }
+  // function get_started(){
+  //   if(crtRef.current !== null)
+  //     // eslint-disable-next-line no-use-before-define
+  //     crtRef.current.focus();
+  // }
 
   const calculate = () => {
     console.log(crt, respiratory_rate, behaviour, blood_pressure, pulse);
@@ -107,7 +108,7 @@ function Home() {
                             <h2 className="hero_title text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold">Pediatric Early Warning Score (<span className="text-theme-color">PEWS</span>)</h2>
                             <p className="mt-2 lg:mr-8">Pews merupakan salah satu alat atau sistem skoring menggunakan karakteristik pasien yang dapat mendeteksi perburukan klinis pada anak di ruang rawat inap saat ini belum ada konsensus dan juga bukti sistem PEW yang paling berguna atau optimal untuk kasus anak.</p>
                             <div className="hero_btn mt-6">
-                                <a onClick={get_started} className="main-btn" href="#" id="get_started">Get Started</a>
+                                <a onClick={() => crtRef.current && crtRef.current.focus()} className="main-btn" href="#" id="get_started">Get Started</a>
                             </div>
                         </div> 
                     </div>
