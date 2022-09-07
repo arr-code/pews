@@ -3,11 +3,11 @@ import {useRef, useState} from 'react'
 
 function Home() {
   const crtRef = useRef<any>(null);
-  const [crt, setCrt] = useState(0);
-  const [respiratory_rate, setRespiratory_rate] = useState(0);
-  const [behaviour, setBehaviour] = useState(0);
-  const [blood_pressure, setBlood_pressure] = useState(0);
-  const [pulse, setPulse] = useState(0);
+  const [crt, setCrt] = useState("");
+  const [respiratory_rate, setRespiratory_rate] = useState("");
+  const [behaviour, setBehaviour] = useState("");
+  const [blood_pressure, setBlood_pressure] = useState("");
+  const [pulse, setPulse] = useState("");
 
   // function get_started(){
   //   if(crtRef.current !== null)
@@ -17,6 +17,10 @@ function Home() {
 
   const calculate = () => {
     console.log(crt, respiratory_rate, behaviour, blood_pressure, pulse);
+  }
+  
+  function onChangeTagInput(e: any) {
+    return e.target.value.replace(/[^0-9.\d]/ig, "");
   }
 
   return <>
@@ -131,11 +135,11 @@ function Home() {
                                     <input 
                                       type="text" 
                                       id="crt" 
-                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      className="block px-4 py-2 w-full text-sm text-black font-semibold bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
                                       placeholder=" " 
                                       ref={crtRef} 
                                       value={crt}
-                                      onChange={e => setCrt(+e.target.value)}
+                                      onChange={e => setCrt(onChangeTagInput(e))}
                                     />
                                     <label htmlFor="crt" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">CRT</label>
                                 </div>
@@ -143,10 +147,10 @@ function Home() {
                                     <input 
                                       type="text" 
                                       id="respiratory_rate" 
-                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      className="block px-4 py-2 w-full text-sm text-black font-semibold bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
                                       placeholder=" " 
                                       value={respiratory_rate}
-                                      onChange={e => setRespiratory_rate(+e.target.value)}
+                                      onChange={e => setRespiratory_rate(onChangeTagInput(e))}
                                     />
                                     <label htmlFor="respiratory_rate" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Respiratory Rate</label>
                                 </div>
@@ -154,10 +158,10 @@ function Home() {
                                     <input 
                                       type="text" 
                                       id="behaviour" 
-                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      className="block px-4 py-2 w-full text-sm text-black font-semibold bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
                                       placeholder=" " 
                                       value={behaviour}
-                                      onChange={e => setBehaviour(+e.target.value)}
+                                      onChange={e => setBehaviour(onChangeTagInput(e))}
                                     />
                                     <label htmlFor="behaviour" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Behaviour</label>
                                 </div>
@@ -165,10 +169,10 @@ function Home() {
                                     <input 
                                       type="text" 
                                       id="blood_pressure" 
-                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      className="block px-4 py-2 w-full text-sm text-black font-semibold bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
                                       placeholder=" " 
                                       value={blood_pressure}
-                                      onChange={e => setBlood_pressure(+e.target.value)}
+                                      onChange={e => setBlood_pressure(onChangeTagInput(e))}
                                     />
                                     <label htmlFor="blood_pressure" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Blood Pressure</label>
                                 </div>
@@ -176,10 +180,10 @@ function Home() {
                                     <input 
                                       type="text" 
                                       id="pulse" 
-                                      className="block px-4 py-2 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
+                                      className="block px-4 py-2 w-full text-sm text-black font-semibold bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-theme-color focus:outline-none focus:ring-0 focus:border-theme-color peer" 
                                       placeholder=" " 
                                       value={pulse}
-                                      onChange={e => setPulse(+e.target.value)}
+                                      onChange={e => setPulse(onChangeTagInput(e))}
                                     />
                                     <label htmlFor="pulse" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-theme-color peer-focus:dark:text-theme-color peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Pulse</label>
                                 </div>
