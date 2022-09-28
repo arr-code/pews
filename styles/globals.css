@@ -11,11 +11,17 @@ body {
   font-family: 'Nunito', sans-serif;
   @apply text-body-color;
 }
+
 *:focus, button:focus {
   @apply outline-none shadow-none;
   outline-offset: none;
   outline: none;
 }
+
+option:hover {
+  @apply bg-theme-color;
+}
+
 h1,
 h2,
 h3,
