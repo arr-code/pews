@@ -1404,7 +1404,8 @@ a, button {
 
 @media (max-width: 960px) {
   .header_hero {
-    height: 1000px;
+    min-height: 1000px;
+    height: 1300px;
   }
 }
 

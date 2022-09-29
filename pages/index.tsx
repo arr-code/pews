@@ -9,27 +9,34 @@ function Home() {
   const umurRef = useRef<any>(null);
   const [umur, setUmur] = useState("");
   const behaviours = [
-    { id: 1, name: '(0) Sesuai' },
-    { id: 2, name: '(+1) Tidak sesuai / diam' },
-    { id: 3, name: '(+2) Gelisah' },
-    { id: 4, name: '(+3) Lesu / bingung atau respon nyeri menurun' }
+    { id: 0, name: '(0) Sesuai' },
+    { id: 1, name: '(+1) Tidak sesuai / diam' },
+    { id: 2, name: '(+2) Gelisah' },
+    { id: 3, name: '(+3) Lesu / bingung atau respon nyeri menurun' }
   ]
   const [behaviour, setBehaviour] = useState(behaviours[0]);
   const pulses = [
-    { id: 1, name: "(0) Warna merah muda atau CRT 1-2 detik" },
-    { id: 2, name: "(+1) Pucat atau CRT 3 detik atau tekanan darah sistolik 10 mmHg di atas atau di bawah batas usia yang sesuai" },
-    { id: 3, name: "(+2) Sangat pucat atau CRT 4 detik atau takikardi diatas normal atau tekanan darah sistolik 20 mmHG di atas atau di bawah batas yang sesuai untuk usianya" },
-    { id: 4, name: "(+3) Sianosis atau CRT {'>'} 5 detik atau takikardi di atas 30 kali nilai normal atau bradikardi" }
+    { id: 0, name: "(0) Warna merah muda atau CRT 1-2 detik" },
+    { id: 1, name: "(+1) Pucat atau CRT 3 detik atau tekanan darah sistolik 10 mmHg di atas atau di bawah batas usia yang sesuai" },
+    { id: 2, name: "(+2) Sangat pucat atau CRT 4 detik atau takikardi diatas normal atau tekanan darah sistolik 20 mmHG di atas atau di bawah batas yang sesuai untuk usianya" },
+    { id: 3, name: "(+3) Sianosis atau CRT {'>'} 5 detik atau takikardi di atas 30 kali nilai normal atau bradikardi" }
   ]
   const [pulse, setPulse] = useState(pulses[0]);
   const respiratory_rates = [
-    {id: 1, name: "(0) Dalam batas normal tidak ada retraksi dada"},
-    {id: 2, name: "(+1) Frekuensi napas >10 dari batasan normal menggunakan otot-otot tambahan"},
-    {id: 3, name: "(+2) Frekuensi napas >20 dari batasan normal dengan retraksi"},
-    {id: 4, name: "(+3) Frekuensi napas <5 di bawah nilai normal dengan retraksi dan atau merintih"}
+    { id: 0, name: "(0) Dalam batas normal tidak ada retraksi dada"},
+    { id: 1, name: "(+1) Frekuensi napas >10 dari batasan normal menggunakan otot-otot tambahan"},
+    { id: 2, name: "(+2) Frekuensi napas >20 dari batasan normal dengan retraksi"},
+    { id: 3, name: "(+3) Frekuensi napas <5 di bawah nilai normal dengan retraksi dan atau merintih"}
   ]
   const [respiratory_rate, setRespiratory_rate] = useState(respiratory_rates[0]);
-  const [result, setResult] = useState(0);
+  const results = [
+    {id: 0, skor:"", color:"none", name: ""},
+    {id: 1, skor:"0-2", color:"bg-green-200 text-green-600", name: "Pasien dalam kondisi stabil. Monitor tanda-tanda vital setiap pergantian jaga/shift"},
+    {id: 2, skor:"3", color:"bg-amber-200 text-amber-600", name: "Pengkajian ulang harus dilakukan oleh Perawat Primer/ Pj Shift. Jika skor pasien akurat maka perawat primer harus menentukan tindakan terhadap kondisi pasien dan melakukan pengkajian ulang setiap 2 jam oleh perawat pelaksana. Pastikan kondisi pasien tercatat dalam di catatan perkembangan pasien."},
+    {id: 3, skor:"4", color:"bg-orange-200 text-orange-600", name: "Pengkajian ulang harus dilakukan oleh Perawat Primer/ Pj Shift dan diketahui oleh dokter jaga residen. Dokter jaga residen harus melaporkan ke DPJP dan memberikan instruksi tatalaksana pada pasien tersebut. Perawat Pelaksana harus memonitor tanda vital pasien setiap jam."},
+    {id: 4, skor:">5", color:"bg-red-200 text-red-600", name: "Hubungi TRC dan melakukan tata laksana kegawatan pada pasien. Dokter jaga Residen hadir disamping pasien (dalam pemantauan/Lapor DPJP) dan berkolaborasi untuk menentukan rencana perawatan pasien selanjutnya. Perawat Pelaksana harus memonitor tanda vital pasien setiap jam."}
+  ]
+  const [result, setResult] = useState(results[0]);
 
   function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -63,13 +70,33 @@ function Home() {
         else if(+umur >=13 && +umur <=18) "respiratory_rate"
     }
 
-    setResult(+respiratory_rate.id + +behaviour.id + +pulse.id)
+    let res = +respiratory_rate.id + +behaviour.id + +pulse.id
+    if(res >=0 && res <=2) setResult(results[1])
+    else if(res == 3) setResult(results[2])
+    else if(res == 4) setResult(results[3])
+    else if(res >= 5) setResult(results[4])
   }
   
   function onChangeTagInput(e: any) {
     let val = e.target.value.replace(/[^0-9\d]/ig, "")
     if(+val > 18) return ""
     else return e.target.value.replace(/[^0-9\d]/ig, "");
+  }
+
+  function resultElement(){
+    if(result.id != 0){
+        return <>
+            <div>
+                <span className="text-md font-bold inline-block py-1 px-2 uppercase rounded-full text-black bg-white last:mr-0 mr-1">
+                    Hasil : 
+                    <span className={'text-sm ml-3 font-bold inline-block py-1 px-2 uppercase rounded last:mr-0 mr-1 ' + result.color}>
+                        {result.name}
+                    </span>
+                </span>
+            </div>
+        </>
+    }
+    return null
   }
 
   return <>
@@ -174,9 +201,9 @@ function Home() {
                     <div className="absolute top-0 w-4full xs:w-full sm:w-full md:w-full lg:w-11/12 xl:w-4/6 2xl:w-4/6 mx-auto items-center shadow-lg">
                         <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl opacity-90">
                             <h2 className="text-2xl font-bold text-gray-800 text-left mb-2">
-                            <div className="2xl:bg-amber-900 xl:bg-red-900 lg:bg-blue-900 md:bg-green-900 sm:bg-slate-900 xs:bg-cyan-900 bg-violet-900">
+                            {/* <div className="2xl:bg-amber-900 xl:bg-red-900 lg:bg-blue-900 md:bg-green-900 sm:bg-slate-900 xs:bg-cyan-900 bg-violet-900">
                                 EUNOIA-CODE
-                            </div>
+                            </div> */}
                                 PEWS CALCULATOR
                             </h2>
                             <form action="" id="pews-calculator" className="w-full relative opacity-100">                                
@@ -397,14 +424,7 @@ function Home() {
                                         </div>
                                     </button>
                                 </div>
-                                <div>
-                                    <span className="text-md font-bold inline-block py-1 px-2 uppercase rounded-full text-black bg-white last:mr-0 mr-1">
-                                        Hasil : 
-                                        <span className="text-md ml-3 font-bold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200 last:mr-0 mr-1">
-                                            {result}
-                                        </span>
-                                    </span>
-                                </div>
+                                {resultElement()}
                             </form>
                         </div>
                     </div>
